@@ -35,11 +35,11 @@ public class DNSTest {
 
     }
 
-    @After
+   /* @After
     public void tearDown() throws Exception {
         driver.quit();
     }
-
+*/
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][]{
@@ -65,8 +65,6 @@ public class DNSTest {
         ResultsPage resultsPage = new ResultsPage();
         resultsPage.chooseProduct(consoleFullName);
 
-        //   mainPage.search(gameName);
-
 
         ProductPage productPage = new ProductPage();
         productPage.savePriceOfCurrentProduct(consoleName);
@@ -89,18 +87,25 @@ public class DNSTest {
         basketPage.checkTotalPriceIs();
 
         productPage.goToBasket();
+
         basketPage.checkWarranty();
+
+      //  basketPage.checkEachCost();
+
+
         basketPage.delete(2);
+        Trash.remove(gameName);
+
 
         Thread.sleep(2000);
-        basketPage.add(1);
-        productPage.savePriceOfCurrentProduct(consoleName);
-        System.out.println(Trash.sumAllPuts());
+        basketPage.add(1,2);
+        basketPage.checkPSCost(3);
 
-        Thread.sleep(2000);
-        basketPage.add(1);
-        productPage.savePriceOfCurrentProduct(consoleName);
-        System.out.println(Trash.sumAllPuts());
+
+        basketPage.returnDeletedElement();    
+
+
+
 
     }
 

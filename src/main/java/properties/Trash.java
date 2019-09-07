@@ -4,17 +4,18 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Trash {
-    private static Map<String, Integer> map = new HashMap<>();
+    private static Map<String, Integer> map = new LinkedHashMap<>();
     Iterator<Map.Entry<String, Integer>> iterator = map.entrySet().iterator();
 
     public static WebDriver driver;
 
-  /*  public static String get(String key){
+   public static Integer get(String key){
         return map.get(key);
-    }*/
+    }
 
     public static void put(String key, int value){
         map.put(key, value);
@@ -29,8 +30,9 @@ public class Trash {
     }
 
     public static void remove(String name){
-
+        map.remove(name);
     }
+
 
 
 }

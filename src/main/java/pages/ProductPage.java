@@ -1,16 +1,11 @@
 package pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import properties.Trash;
 
-import java.util.concurrent.TimeUnit;
 
 public class ProductPage extends BasePage {
     private Select select;
@@ -62,10 +57,7 @@ public class ProductPage extends BasePage {
 
     public void addWarrantyTwoYears() {
 
-       // driver.manage().window().setSize(new Dimension(1024,768));
         select = new Select(addWarrantyTwoYears);
-
-       // select.selectByVisibleText("1 год");
          select.selectByVisibleText("2 года");
 
 

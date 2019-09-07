@@ -22,6 +22,10 @@ public class BasketPage extends BasePage{
    WebElement totalPrice;
    @FindBy(xpath = "//div[@class='radio radio_checked']//label[@class='radio__label'][contains(text(), '2 года')]")
    WebElement checkBoxElement;
+   @FindBy(xpath = "//span[.='Вернуть удалённый товар']")
+   WebElement deletedElement;
+
+
 
 
     public void checkTotalPriceIs(){
@@ -59,19 +63,27 @@ public class BasketPage extends BasePage{
 
     }
 
-    public void add(int index){
+    public void add(int index, int count) throws InterruptedException {
         String productAdd = String.format("//div[@class='cart-list__products']/div[%d]//i[@class='count-buttons__icon-plus']", index);
         WebElement productItemA = driver.findElement(By.xpath(productAdd));
 
        /* WebDriverWait wait = new WebDriverWait(driver, 30);
         wait.pollingEvery(1, TimeUnit.SECONDS);
         wait.until(ExpectedConditions.elementToBeClickable(productItemA));*/
-
-        productItemA.click();
-
-
-
-
+        for (int i = 0; i < count; i++) {
+            productItemA.click();
+            Thread.sleep(2500);
+        }
     }
+
+    public void checkPSCost(int count){
+        String price = totalPrice.getText().replaceAll(" ", "");
+        assertEquals("Сумма в корзине не соотвествует ожидаемой", Trash.sumAllPuts()*count, Integer.parseInt(price));
+    }
+
+public void returnDeletedElement(){
+        deletedElement.click();
+}
+
 
 }
