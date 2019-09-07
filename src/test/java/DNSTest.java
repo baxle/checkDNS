@@ -1,3 +1,4 @@
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,6 +33,11 @@ public class DNSTest {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         Trash.driver = driver;
 
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        driver.quit();
     }
 
     @Parameterized.Parameters
