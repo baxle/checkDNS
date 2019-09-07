@@ -41,17 +41,7 @@ public class BasketPage extends BasePage{
         assertFalse("Гарантия 2 года отсутствует", checkBoxElement.isSelected());
     }
 
-  /*  public void checkProductsPrice(){
-        double fullCost = 0;
-        for (int i = 0; i < cost.length; i++) {
-            fullCost += cost[i];
-            String c = (int) cost[i] / 1000 + " " + (int) cost[i] % 1000;
-            String product = String.format("//div[contains(@class, 'item-price')][1]//span[.='%s']", c);
-            WebElement productItem = getDriver().findElement(By.xpath(product));
-            assertEquals(c, productItem.getText());
-        }
-    }
-*/
+
 
     public void delete(int index){
 
@@ -82,7 +72,12 @@ public class BasketPage extends BasePage{
     }
 
 public void returnDeletedElement(){
-        deletedElement.click();
+
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        wait.pollingEvery(1, TimeUnit.SECONDS);
+        wait.until(ExpectedConditions.elementToBeClickable(deletedElement));
+    deletedElement.click();
+
 }
 
 

@@ -102,7 +102,7 @@ public class DNSTest {
         basketPage.checkPSCost(3);
 
 
-        basketPage.returnDeletedElement();    
+        basketPage.returnDeletedElement();
 
 
 
