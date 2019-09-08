@@ -26,8 +26,15 @@ public class Trash {
     }
 
     public static int sumAllPuts(){
-       int sum = 0;
+        int sum = 0;
+        boolean b =true;
+
         for (int i : map.values()) {
+            if(b){
+                b = false;
+                continue;
+            }
+
             sum += i;
         }
         return sum;

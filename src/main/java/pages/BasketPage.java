@@ -26,13 +26,14 @@ public class BasketPage extends BasePage {
     WebElement deletedElement;
 
 
+
     public void checkTotalPriceIs() {
         String price = totalPrice.getText().replaceAll(" ", "");
       /*  System.out.println("String price" + price);
         System.out.println("summ"+Trash.sumAllPuts());*/
 
         assertEquals("Сумма в корзине не соотвествует ожидаемой", Trash.sumAllPuts(), Integer.parseInt(price));
-
+//-Trash.get(key)
     }
 
     public void checkWarranty() {
@@ -78,13 +79,23 @@ public class BasketPage extends BasePage {
     }
 
 
- /*   public void checkEachPrice(int indexInBasket, String product, int countOfProducts) {
+    public void checkEachPrice(int indexInBasket, String product, int countOfProducts) {
 
 
-        int price = /countOfProducts;
+        int price = Trash.get(product) * countOfProducts;
+        String priceFormat = (int) price / 1000 + " " + (int) price % 1000;;
+       // System.out.println("priceFormat=" + priceFormat);
 
-    assertEquals(Trash.get(product), );
+
+
+        String prod = String.format("//span[.='%s']", priceFormat);
+
+        String priceFromSite = driver.findElement(By.xpath(prod)).getText();
+       // System.out.println("priceFromsite"+priceFromSite);
+
+
+        assertEquals("Сумма за товар не соответствует ожидаемой", priceFormat, priceFromSite);
     }
-*/
+
 
 }

@@ -35,11 +35,11 @@ public class DNSTest {
 
     }
 
-   /* @After
-    public void tearDown() throws Exception {
-        driver.quit();
-    }
-*/
+    /* @After
+     public void tearDown() throws Exception {
+         driver.quit();
+     }
+ */
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][]{
@@ -70,12 +70,15 @@ public class DNSTest {
         productPage.savePriceOfCurrentProduct(consoleName);
 
         productPage.addWarrantyTwoYears();
-        productPage.savePriceOfCurrentProduct(consoleName);
+
+        productPage.savePriceOfCurrentProduct(consoleName+" Warranty2Years");
+
+       // Trash.printMap();
 
 
-        productPage.savePriceOfCurrentProduct(consoleName);
         productPage.addToBasket();
 
+       // Trash.printMap();
 
         mainPage.search(gameName);
         productPage.savePriceOfCurrentProduct(gameName);
@@ -92,25 +95,20 @@ public class DNSTest {
         basketPage.checkWarranty();
 
 
-      //  basketPage.checkEachPrice(1, consoleName, 3);
-       // basketPage.checkEachPrice(2, gameName, 1);
+        basketPage.checkEachPrice(1, consoleName, 1);
+        basketPage.checkEachPrice(2, gameName, 1);
 
 
-
-        basketPage.delete(2); 
+        basketPage.delete(2);
         Trash.remove(gameName);
 
 
         Thread.sleep(2000);
-        basketPage.add(1,2);
+        basketPage.add(1, 2);
         basketPage.checkPSCost(3);
-
+       // basketPage.checkEachPrice(1, consoleName+" Warranty2Years", 1);
 
         basketPage.returnDeletedElement();
-
-
-
-
 
 
     }
