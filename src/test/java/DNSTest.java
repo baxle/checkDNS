@@ -64,8 +64,7 @@ public class DNSTest {
 
         ResultsPage resultsPage = new ResultsPage();
         resultsPage.chooseProduct(consoleFullName);
-
-
+        
         ProductPage productPage = new ProductPage();
         productPage.savePriceOfCurrentProduct(consoleName);
 
@@ -73,17 +72,11 @@ public class DNSTest {
 
         productPage.savePriceOfCurrentProduct(consoleName+" Warranty2Years");
 
-       // Trash.printMap();
-
-
         productPage.addToBasket();
-
-       // Trash.printMap();
 
         mainPage.search(gameName);
         productPage.savePriceOfCurrentProduct(gameName);
         productPage.addToBasket();
-
 
         Thread.sleep(1500);
 
@@ -94,19 +87,15 @@ public class DNSTest {
 
         basketPage.checkWarranty();
 
-
         basketPage.checkEachPrice(1, consoleName, 1);
         basketPage.checkEachPrice(2, gameName, 1);
-
 
         basketPage.delete(2);
         Trash.remove(gameName);
 
-
         Thread.sleep(2000);
         basketPage.add(1, 2);
         basketPage.checkPSCost(3);
-       // basketPage.checkEachPrice(1, consoleName+" Warranty2Years", 1);
 
         basketPage.returnDeletedElement();
 
