@@ -96,7 +96,11 @@ public class DNSTest {
         Thread.sleep(2000);
 
         basketPage.checkTotalPriceIs();
-        basketPage.add(1, 2);
+
+        //   basketPage.add(1, 2);
+     basketPage.add(1);
+       // basketPage.add(1);
+
         basketPage.checkPSCost(3);
 
         basketPage.returnDeletedElement();
