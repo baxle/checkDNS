@@ -81,6 +81,7 @@ public class DNSTest {
         productPage.savePriceOfCurrentProduct(gameName);
         productPage.addToBasket();
 
+
         Thread.sleep(1500);
 
         BasketPage basketPage = new BasketPage();
@@ -90,10 +91,13 @@ public class DNSTest {
 
         basketPage.checkWarranty();
 
-      //  basketPage.checkEachCost();
+
+      //  basketPage.checkEachPrice(1, consoleName, 3);
+       // basketPage.checkEachPrice(2, gameName, 1);
 
 
-        basketPage.delete(2);
+
+        basketPage.delete(2); 
         Trash.remove(gameName);
 
 
@@ -103,6 +107,8 @@ public class DNSTest {
 
 
         basketPage.returnDeletedElement();
+
+
 
 
 

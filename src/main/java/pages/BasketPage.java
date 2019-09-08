@@ -13,22 +13,20 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.*;
 
-public class BasketPage extends BasePage{
+public class BasketPage extends BasePage {
 
-   /* By totalPrice = By.xpath(".//div[contains(@class, 'total-amount')]//*[contains(@class, 'item-price')]");*/
-  // @FindBy(xpath = ".//div[contains(@class, 'total-amount')]//*[contains(@class, 'item-price')]")
-   //@FindBy(xpath = ".//span[contains(@class, 'btn-cart-link__price')]")
-   @FindBy(xpath = "//div[@class='buttons']//span[@class='btn-cart-link__price']")
-   WebElement totalPrice;
-   @FindBy(xpath = "//div[@class='radio radio_checked']//label[@class='radio__label'][contains(text(), '2 года')]")
-   WebElement checkBoxElement;
-   @FindBy(xpath = "//span[.='Вернуть удалённый товар']")
-   WebElement deletedElement;
-
-
+    /* By totalPrice = By.xpath(".//div[contains(@class, 'total-amount')]//*[contains(@class, 'item-price')]");*/
+    // @FindBy(xpath = ".//div[contains(@class, 'total-amount')]//*[contains(@class, 'item-price')]")
+    //@FindBy(xpath = ".//span[contains(@class, 'btn-cart-link__price')]")
+    @FindBy(xpath = "//div[@class='buttons']//span[@class='btn-cart-link__price']")
+    WebElement totalPrice;
+    @FindBy(xpath = "//div[@class='radio radio_checked']//label[@class='radio__label'][contains(text(), '2 года')]")
+    WebElement checkBoxElement;
+    @FindBy(xpath = "//span[.='Вернуть удалённый товар']")
+    WebElement deletedElement;
 
 
-    public void checkTotalPriceIs(){
+    public void checkTotalPriceIs() {
         String price = totalPrice.getText().replaceAll(" ", "");
       /*  System.out.println("String price" + price);
         System.out.println("summ"+Trash.sumAllPuts());*/
@@ -37,18 +35,17 @@ public class BasketPage extends BasePage{
 
     }
 
-    public void checkWarranty(){
+    public void checkWarranty() {
         assertFalse("Гарантия 2 года отсутствует", checkBoxElement.isSelected());
     }
 
 
-
-    public void delete(int index){
+    public void delete(int index) {
 
 
         String productDel = String.format("//div[@class='cart-list__products']/div[%d]//i[@class='remove-button__icon']", index);
         WebElement productItemD = driver.findElement(By.xpath(productDel));
-     productItemD.click();
+        productItemD.click();
 
 
     }
@@ -66,19 +63,28 @@ public class BasketPage extends BasePage{
         }
     }
 
-    public void checkPSCost(int count){
+    public void checkPSCost(int count) {
         String price = totalPrice.getText().replaceAll(" ", "");
-        assertEquals("Сумма в корзине не соотвествует ожидаемой", Trash.sumAllPuts()*count, Integer.parseInt(price));
+        assertEquals("Сумма в корзине не соотвествует ожидаемой", Trash.sumAllPuts() * count, Integer.parseInt(price));
     }
 
-public void returnDeletedElement(){
+    public void returnDeletedElement() {
 
         WebDriverWait wait = new WebDriverWait(driver, 30);
         wait.pollingEvery(1, TimeUnit.SECONDS);
         wait.until(ExpectedConditions.elementToBeClickable(deletedElement));
-    deletedElement.click();
+        deletedElement.click();
 
-}
+    }
 
+
+ /*   public void checkEachPrice(int indexInBasket, String product, int countOfProducts) {
+
+
+        int price = /countOfProducts;
+
+    assertEquals(Trash.get(product), );
+    }
+*/
 
 }

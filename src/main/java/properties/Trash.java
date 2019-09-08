@@ -1,11 +1,15 @@
 package properties;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import static org.junit.Assert.assertEquals;
 
 public class Trash {
     private static Map<String, Integer> map = new LinkedHashMap<>();
@@ -33,6 +37,12 @@ public class Trash {
         map.remove(name);
     }
 
-
-
+public static void printMap(){
+    System.out.println(map);
 }
+
+
+
+
+    }
+
