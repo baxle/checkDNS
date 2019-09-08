@@ -34,7 +34,7 @@ public class BasketPage extends BasePage {
     Function<? super WebDriver, Object> valueChanged = new ExpectedCondition<Object>() {
         @Override
         public Boolean apply(WebDriver webDriver) {
-            return !(totalPrice.getText()!=(oldValue));
+            return !(totalPrice.getText().equals(oldValue));
         }
     };
 
@@ -92,7 +92,7 @@ public class BasketPage extends BasePage {
     public void add(int index) throws InterruptedException {
         String productAdd = String.format("//div[@class='cart-list__products']/div[%d]//i[@class='count-buttons__icon-plus']", index);
         WebElement productItemA = driver.findElement(By.xpath(productAdd));
-        
+
         /*for (int i = 0; i < count; i++) {
             productItemA.click();
             Thread.sleep(2500);*/
