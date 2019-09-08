@@ -64,7 +64,7 @@ public class DNSTest {
 
         ResultsPage resultsPage = new ResultsPage();
         resultsPage.chooseProduct(consoleFullName);
-        
+
         ProductPage productPage = new ProductPage();
         productPage.savePriceOfCurrentProduct(consoleName);
 
@@ -94,6 +94,8 @@ public class DNSTest {
         Trash.remove(gameName);
 
         Thread.sleep(2000);
+
+        basketPage.checkTotalPriceIs();
         basketPage.add(1, 2);
         basketPage.checkPSCost(3);
 

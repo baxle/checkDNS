@@ -2,14 +2,17 @@ package pages;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import properties.Trash;
 
 import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 
 import static org.junit.Assert.*;
 
@@ -31,6 +34,7 @@ public class BasketPage extends BasePage {
         String price = totalPrice.getText().replaceAll(" ", "");
       /*  System.out.println("String price" + price);
         System.out.println("summ"+Trash.sumAllPuts());*/
+
 
         assertEquals("Сумма в корзине не соотвествует ожидаемой", Trash.sumAllPuts(), Integer.parseInt(price));
 //-Trash.get(key)
@@ -55,14 +59,31 @@ public class BasketPage extends BasePage {
         String productAdd = String.format("//div[@class='cart-list__products']/div[%d]//i[@class='count-buttons__icon-plus']", index);
         WebElement productItemA = driver.findElement(By.xpath(productAdd));
 
-       /* WebDriverWait wait = new WebDriverWait(driver, 30);
-        wait.pollingEvery(1, TimeUnit.SECONDS);
-        wait.until(ExpectedConditions.elementToBeClickable(productItemA));*/
-        for (int i = 0; i < count; i++) {
+
+        /*for (int i = 0; i < count; i++) {
             productItemA.click();
-            Thread.sleep(2500);
+            Thread.sleep(2500);*/
+
+        for (int i = 0; i < count; i++) {
+
+            String oldValue = totalPrice.getText();
+            Function<? super WebDriver, Object> valueChanged = new ExpectedCondition<Object>() {
+                @Override
+                public Boolean apply(WebDriver webDriver) {
+                    return !(totalPrice.getText().equals(oldValue));
+                }
+            };
+
+
+            productItemA.click();
+            wait.until(valueChanged);
+
         }
-    }
+
+            //действие для изменения значения
+
+
+        }
 
     public void checkPSCost(int count) {
         String price = totalPrice.getText().replaceAll(" ", "");
