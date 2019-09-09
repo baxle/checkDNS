@@ -29,12 +29,14 @@ public class BasketPage extends BasePage {
     WebElement deletedElement;
 
 
-    private String oldValue;
+    private int oldValue;
+
+
 
     Function<? super WebDriver, Object> valueChanged = new ExpectedCondition<Object>() {
         @Override
         public Boolean apply(WebDriver webDriver) {
-            return !(totalPrice.getText().equals(oldValue));
+            return !(getPrice()!=(oldValue));
         }
     };
 
@@ -66,6 +68,7 @@ public class BasketPage extends BasePage {
     public void add(int index, int count) throws InterruptedException {
         String productAdd = String.format("//div[@class='cart-list__products']/div[%d]//i[@class='count-buttons__icon-plus']", index);
         WebElement productItemA = driver.findElement(By.xpath(productAdd));
+        WebDriverWait wait = new WebDriverWait(driver, 30);
 
 
         /*for (int i = 0; i < count; i++) {
@@ -89,22 +92,25 @@ public class BasketPage extends BasePage {
         }
     }
 
-    public void add(int index) throws InterruptedException {
-        String productAdd = String.format("//div[@class='cart-list__products']/div[%d]//i[@class='count-buttons__icon-plus']", index);
-        WebElement productItemA = driver.findElement(By.xpath(productAdd));
+ /*   public void add(int index) throws InterruptedException {
 
-        /*for (int i = 0; i < count; i++) {
+
+        *//*for (int i = 0; i < count; i++) {
             productItemA.click();
-            Thread.sleep(2500);*/
-           oldValue = totalPrice.getText();
+            Thread.sleep(2500);*//*
+           oldValue = getPrice();
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+       // String productAdd = String.format("//div[@class='cart-list__products']/div[%d]//i[@class='count-buttons__icon-plus']", index);
+        WebElement productItemA = driver.findElement(By.xpath("//div[@class='cart-list__products']/div[" +index+ "]//i[@class='count-buttons__icon-plus']"));
             productItemA.click();
             wait.until(valueChanged);
 
-        }
+        }*/
 
 
     public void checkPSCost(int count) {
         String price = totalPrice.getText().replaceAll(" ", "");
+       // System.out.println(Trash.sumAllPuts());
         assertEquals("Сумма в корзине не соотвествует ожидаемой", Trash.sumAllPuts() * count, Integer.parseInt(price));
     }
 
@@ -137,4 +143,7 @@ public class BasketPage extends BasePage {
     }
 
 
+    public int getPrice(){
+        return Integer.parseInt(totalPrice.getText().replace(" ", ""));
+    }
 }

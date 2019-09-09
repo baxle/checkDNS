@@ -97,9 +97,8 @@ public class DNSTest {
 
         basketPage.checkTotalPriceIs();
 
-        //   basketPage.add(1, 2);
-     basketPage.add(1);
-       // basketPage.add(1);
+          basketPage.add(1, 2);
+
 
         basketPage.checkPSCost(3);
 
