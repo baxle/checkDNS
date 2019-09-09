@@ -78,8 +78,6 @@ public class DNSTest {
         productPage.savePriceOfCurrentProduct(gameName);
         productPage.addToBasket();
 
-        Thread.sleep(1500);
-
         BasketPage basketPage = new BasketPage();
         basketPage.checkTotalPriceIs();
 
@@ -93,7 +91,7 @@ public class DNSTest {
         basketPage.delete(2);
         Trash.remove(gameName);
 
-        Thread.sleep(2000);
+
 
         basketPage.checkTotalPriceIs();
 

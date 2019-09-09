@@ -60,8 +60,18 @@ public class BasketPage extends BasePage {
 
         String productDel = String.format("//div[@class='cart-list__products']/div[%d]//i[@class='remove-button__icon']", index);
         WebElement productItemD = driver.findElement(By.xpath(productDel));
-        productItemD.click();
+        WebDriverWait wait = new WebDriverWait(driver, 30);
 
+        String oldValue = totalPrice.getText();
+        Function<? super WebDriver, Object> valueChanged = new ExpectedCondition<Object>() {
+            @Override
+            public Boolean apply(WebDriver webDriver) {
+                return !(totalPrice.getText().equals(oldValue));
+            }
+        };
+
+        productItemD.click();
+        wait.until(valueChanged);
 
     }
 

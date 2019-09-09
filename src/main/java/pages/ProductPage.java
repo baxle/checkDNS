@@ -1,17 +1,20 @@
 package pages;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import properties.Trash;
+
+import java.util.function.Function;
 
 
 public class ProductPage extends BasePage {
     private Select select;
-    private Wait wait;
-    private String oldPrice;
-    private String newPrice;
+
    /* @FindBy(xpath = "//*[contains(@class, 'ui-input-search__input main-search-form__input ui-autocomplete-input')]")
     WebElement searchTextField;*/
 
@@ -24,6 +27,8 @@ public class ProductPage extends BasePage {
     WebElement goToBasket;
     @FindBy(xpath = ".//div[contains(@class, 'desktop-selector')]//select[contains(@class, 'form-control select')]")
     WebElement addWarrantyTwoYears;
+    @FindBy(xpath = "//div[@class='buttons']//span[@class='btn-cart-link__price']")
+    WebElement totalPrice;
 
 
 
@@ -43,10 +48,20 @@ public class ProductPage extends BasePage {
     }
 
     public void addToBasket() {
+        //addToBasket.click();
+
+
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        String oldValue = totalPrice.getText();
+        Function<? super WebDriver, Object> valueChanged = new ExpectedCondition<Object>() {
+            @Override
+            public Boolean apply(WebDriver webDriver) {
+                return !(totalPrice.getText().equals(oldValue));
+            }
+        };
+
         addToBasket.click();
-       /* WebDriverWait wait = new WebDriverWait(driver, 30);
-        wait.pollingEvery(1, TimeUnit.SECONDS);
-        wait.until(ExpectedConditions.elementToBeClickable(addedToBasketFlag));*/
+        wait.until(valueChanged);
     }
 
     public void goToBasket() {
